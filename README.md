@@ -5,7 +5,7 @@ Includes: Node, Express, SocketIO, Postgres, Redis - with pug templating.
 ## Instructions
 `cd nespr`  
 `npm install`  
-Set `CONFIG` variables in `./config/config.js`
+Set `CONFIG` variables in `./config/config.js`  
 `node index`  
 
 #### Easily deploy this to Heroku  
