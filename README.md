@@ -1,6 +1,6 @@
 # nespr
-## A blank, session-ready webapp for testing.
-Includes: Node, Express, SocketIO, Postgres, Redis - with pug templating.
+## A blank, session-ready webapp for testing & whatever else
+Built with: Node, Express, SocketIO, Postgres, Redis - with pug templating.
 
 ## Instructions
 `cd nespr`  
