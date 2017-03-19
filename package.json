@@ -1,0 +1,38 @@
+{
+  "name": "nespr",
+  "version": "1.0.0",
+  "description": "A blank, session-ready webapp for testing. Includes: Node, Express, SocketIO, Postgres, Redis - with pug templating. Easily deploy to Heroku!",
+  "main": " index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/criewaldt/nespr.git"
+  },
+  "keywords": [
+    "Node",
+    "Express",
+    "SocketIO",
+    "Postgres",
+    "Redis",
+    "Pug",
+    "Heroku",
+    "Heroku-Redis"
+  ],
+  "author": "Chris Riewaldt",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/criewaldt/nespr/issues"
+  },
+  "homepage": "https://github.com/criewaldt/nespr#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "connect-redis": "^3.2.0",
+    "express": "^4.15.2",
+    "express-session": "^1.15.1",
+    "pg": "^6.1.4",
+    "pug": "^2.0.0-beta11",
+    "socket.io": "^1.7.3"
+  }
+}
