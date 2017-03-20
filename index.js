@@ -7,14 +7,14 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 
-//NESPR Config
+//NESPR CONFIG vars
 var nesprCONFIG = require(__dirname + '/config/config.js');
 
-//environment stage
+//Set Environment var
 var DEPLOY_ENV = nesprCONFIG.DEPLOY_ENV;
-console.log('NESPR Environment: ' +DEPLOY_ENV);
+console.log('NESPR env: ' +DEPLOY_ENV);
 
-//Postgres - Local or Heroku
+//Postgres - Local, remote, or Heroku - Same auth needed
 var pg = require('pg');
 pg.defaults.ssl = true;
 var pgConfig = {
@@ -77,6 +77,9 @@ else if (DEPLOY_ENV == "local") {
         saveUninitialized: false,
         resave: false
     }));
+}
+else {
+    console.log('Error with Redis, check your DEPLOY_ENV var in /config/config.js');
 }
 // -->
 
