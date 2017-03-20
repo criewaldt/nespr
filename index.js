@@ -7,21 +7,22 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 
-//Config
-CONFIG = require(__dirname + '/config/config.js');
+//NESPR Config
+var nesprCONFIG = require(__dirname + '/config/config.js');
 
 //environment stage
-DEPLOY_ENV = CONFIG.DEPLOY_ENV;
+var DEPLOY_ENV = nesprCONFIG.DEPLOY_ENV;
+console.log('NESPR Environment: ' +DEPLOY_ENV);
 
 //Postgres - Local or Heroku
 var pg = require('pg');
 pg.defaults.ssl = true;
 var pgConfig = {
-    user: process.env.PGUSER || CONFIG.PGUSER, //env var: PGUSER
-    database: process.env.PGDATABASE || CONFIG.PGDATABASE, //env var: PGDATABASE
-    password: process.env.PGPASSWORD || CONFIG.PGPASSWORD, //env var: PGPASSWORD
-    host: process.env.PGHOST || CONFIG.PGHOST, // Server hosting the postgres database
-    port: process.env.PGPORT || CONFIG.PGPORT, //env var: PGPORT
+    user: process.env.PGUSER || nesprCONFIG.PGUSER, //env var: PGUSER
+    database: process.env.PGDATABASE || nesprCONFIG.PGDATABASE, //env var: PGDATABASE
+    password: process.env.PGPASSWORD || nesprCONFIG.PGPASSWORD, //env var: PGPASSWORD
+    host: process.env.PGHOST || nesprCONFIG.PGHOST, // Server hosting the postgres database
+    port: process.env.PGPORT || nesprCONFIG.PGPORT, //env var: PGPORT
     max: 10, // max number of clients in the pool
     idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
 };
@@ -99,29 +100,38 @@ function restricted(req, res, next) {
     }
 }
 
+
 //index view
 app.get('/', function(req, res) {
-    res.send('This is the index page.');
+    res.send('Index page goes here.');
 });
 
-//restricted view
-app.get('/', restricted, function(req, res) {
+//restricted view test
+app.get('/restricted', restricted, function(req, res) {
     res.send('This is a restricted page, but youll never be able to see it because there is no login endpoint & logic... yet.');
+});
+
+//socket view test
+app.get('/socket', function(req, res) {
+    res.render('socket_example');
 });
 
 //404
 app.get('*', function(req, res){
-  res.status(404).send("This page doesn't exist... yet");
+    res.status(404).send("This page doesn't exist... yet");
 });
 
-//SocketIO
-io.on('connection', function(socket){
-    socket.on('ping', function(msg){
-        io.emit('pong', msg);
+//SocketIO Event Listeners
+io.on('connection', function(socket) {
+    console.log('Client connected.');
+
+    // Disconnect listener
+    socket.on('disconnect', function() {
+        console.log('Client disconnected.');
     });
 });
 
 //start listening
 http.listen(port, function(){
-  console.log('listening on *:' + port);
+    console.log('listening on *:' + port);
 });
