@@ -1,0 +1,26 @@
+html(ng-app="todoApp")
+    head
+        title AngularJS Test
+        //load angular and todo JS
+        script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js")
+        script(src="js/todo.js")
+    body
+        h1 AngularJS Test
+        span Todo example from 
+            a(href="https://angularjs.org/") AngularJS.org
+        br
+        br
+        div(ng-controller="TodoListController as todoList")
+            span {{todoList.remaining()}} of {{todoList.todos.length}} remaining [
+                a(href="" ng-click="todoList.archive()") archive
+            | ]
+            ul.unstyled
+                li(ng-repeat="todo in todoList.todos")
+                    label.checkbox
+                        input(type="checkbox" ng-model="todo.done")
+                        span(class="done-{{todo.done}}") {{todo.text}}
+            form(ng-submit="todoList.addTodo()")
+                input(type="text" ng-model="todoList.todoText"  size="30" placeholder="add new todo here")
+                input.btn-primary(type="submit" value="add")
+
+

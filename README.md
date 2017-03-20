@@ -1,8 +1,8 @@
-# parse
-## A barebones, session-ready stack for testing & whatever else...
+# PARSE
+### A barebones, session-ready stack for testing & whatever else...
 Built with: Node, Express, SocketIO, Postgres, Angular, and Redis - with Pug template engine. Local or Heroku-Redis session handling middleware included.
 
-## Instructions
+### Instructions
 `cd parse`  
 `npm install`  
 Set config variables in `/config/config.js`  

@@ -112,12 +112,18 @@ app.get('/', function(req, res) {
 
 //restricted view test
 app.get('/restricted', restricted, function(req, res) {
-    res.send('This is a restricted page, but youll never be able to see it because there is no login endpoint & logic... yet.');
+    res.send('This is a restricted page, but youll never be able to see it because there is no login endpoint & session logic... yet.');
 });
 
 //socket view test
 app.get('/socket', function(req, res) {
-    res.render('socket_example');
+    res.render('socketio');
+});
+
+//angular view test
+app.get('/angular', function(req, res) {
+    //pulled Todo example from AngularJS.org
+    res.render('angular');
 });
 
 //404
