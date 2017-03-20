@@ -1,9 +1,9 @@
-# nespr
+# parse
 ## A barebones, session-ready webapp for testing & whatever else...
-Built with: Node, Express, SocketIO, Postgres, and Redis - with Pug template engine. Supports Heroku-Redis session handling.
+Built with: Node, Express, SocketIO, Postgres, Angular, and Redis - with Pug template engine. Supports Heroku-Redis session handling.
 
 ## Instructions
-`cd nespr`  
+`cd parse`  
 `npm install`  
 Set config variables in `/config/config.js`  
 `node index`  
