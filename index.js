@@ -8,7 +8,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 
-// NESPR CONFIG vars
+// PARSE config vars
 var parseCONFIG = require(__dirname + '/config/config.js');
 
 // Set Environment var and log to console

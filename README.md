@@ -1,5 +1,5 @@
 # PARSE
-### A barebones, session-ready stack for testing & whatever else...
+### A barebones, session-ready stack for Heroku testing & whatever else...
 Built with: Node, Express, SocketIO, Postgres, Angular, and Redis - with Pug template engine. Local or Heroku-Redis session handling middleware included.
 
 ### Instructions

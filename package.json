@@ -1,10 +1,10 @@
 {
   "name": "nespr",
   "version": "1.0.0",
-  "description": "A blank, session-ready webapp for testing. Includes: Node, Express, SocketIO, Postgres, Redis - with pug templating. Easily deploy to Heroku!",
+  "description": "A barebones, session-ready stack for Heroku testing & whatever else... Built with: Node, Express, SocketIO, Postgres, Angular, and Redis - with Pug template engine. Local or Heroku-Redis session handling middleware included.",
   "main": " index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index"
   },
   "repository": {
     "type": "git",
