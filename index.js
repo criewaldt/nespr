@@ -1,4 +1,4 @@
-//index.js
+// PARSE - index.js
 var app = require('express')();
 var express = require('express');
 var session = require('express-session');
@@ -8,17 +8,18 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 
-//NESPR CONFIG vars
+// NESPR CONFIG vars
 var nesprCONFIG = require(__dirname + '/config/config.js');
 
-//Set Environment var
+// Set Environment var
 var DEPLOY_ENV = nesprCONFIG.DEPLOY_ENV;
 console.log('NESPR env: ' +DEPLOY_ENV);
 
-//Postgres - Local, remote, or Heroku - Same auth needed
+// Postgres - Local, remote, or Heroku - Same auth needed -->
 var pg = require('pg');
 pg.defaults.ssl = true;
 var pgConfig = {
+    // These will autopopulate if deployed to Heroku
     user: process.env.PGUSER || nesprCONFIG.PGUSER, //env var: PGUSER
     database: process.env.PGDATABASE || nesprCONFIG.PGDATABASE, //env var: PGDATABASE
     password: process.env.PGPASSWORD || nesprCONFIG.PGPASSWORD, //env var: PGPASSWORD
@@ -30,8 +31,10 @@ var pgConfig = {
 var pool = new pg.Pool(pgConfig);
 // EXAMPLE: Postgres Query
 /*
-// to run a query we can acquire a client from the pool,
-// run a query on the client, and then return the client to the pool
+// To run a query we can acquire a client from the pool,
+// run a query on the client, and then return the client to the pool.
+
+// Middleware can be written for this to make it easier
 pool.connect(function(err, client, done) {
     if(err) {
         return console.error('error fetching client from pool', err);
@@ -50,6 +53,7 @@ pool.on('error', function (err, client) {
     console.error('idle client error', err.message, err.stack);
 });
 */
+// -->
 
 // REDIS -->
 if (DEPLOY_ENV == "heroku") {
@@ -84,55 +88,59 @@ else {
 }
 // -->
 
-//Pug Tempalate Engine
+// Pug Tempalate Engine
 require('pug');
 app.set('view engine', 'pug');
 
-//SERVE STATIC FILES
+// Serve Static Files
 app.use(express.static(__dirname + '/public'));
 
+// Set encoding
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-//Session  middleware
+// Session middleware
 function restricted(req, res, next) {
     if (req.session && req.session.user) {
         next();
     } else {
         req.session.destroy();
-        res.redirect('/login');
+        res.redirect('/');
     }
 }
 
+// Need login view and create session logic here
 
-//index view
+// index view
 app.get('/', function(req, res) {
     res.send('Index page goes here.');
 });
 
-//restricted view test
+// restricted view test
 app.get('/restricted', restricted, function(req, res) {
     res.send('This is a restricted page, but youll never be able to see it because there is no login endpoint & session logic... yet.');
 });
 
-//socket view test
+// socket view test
 app.get('/socket', function(req, res) {
     res.render('socketio');
 });
 
-//angular view test
+// angular view test
 app.get('/angular', function(req, res) {
     //pulled Todo example from AngularJS.org
     res.render('angular');
 });
 
-//404
+// 404 for any page that doesnt exist - This goes after all other views
 app.get('*', function(req, res){
     res.status(404).send("This page doesn't exist... yet");
 });
 
-//SocketIO Event Listeners
+//SocketIO Server -->
 io.on('connection', function(socket) {
+    
+    //SocketIO listeners
     console.log('Client connected.');
 
     // Disconnect listener
@@ -140,8 +148,9 @@ io.on('connection', function(socket) {
         console.log('Client disconnected.');
     });
 });
+// -->
 
-//start listening
+//start http listening
 http.listen(port, function(){
     console.log('listening on *:' + port);
 });
