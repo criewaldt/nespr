@@ -9,22 +9,22 @@ var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 
 // NESPR CONFIG vars
-var nesprCONFIG = require(__dirname + '/config/config.js');
+var parseCONFIG = require(__dirname + '/config/config.js');
 
-// Set Environment var
-var DEPLOY_ENV = nesprCONFIG.DEPLOY_ENV;
-console.log('NESPR env: ' +DEPLOY_ENV);
+// Set Environment var and log to console
+var DEPLOY_ENV = parseCONFIG.DEPLOY_ENV;
+console.log('PARSE env: ' + DEPLOY_ENV);
 
 // Postgres - Local, remote, or Heroku - Same auth needed -->
 var pg = require('pg');
 pg.defaults.ssl = true;
 var pgConfig = {
     // These will autopopulate if deployed to Heroku
-    user: process.env.PGUSER || nesprCONFIG.PGUSER, //env var: PGUSER
-    database: process.env.PGDATABASE || nesprCONFIG.PGDATABASE, //env var: PGDATABASE
-    password: process.env.PGPASSWORD || nesprCONFIG.PGPASSWORD, //env var: PGPASSWORD
-    host: process.env.PGHOST || nesprCONFIG.PGHOST, // Server hosting the postgres database
-    port: process.env.PGPORT || nesprCONFIG.PGPORT, //env var: PGPORT
+    user: process.env.PGUSER || parseCONFIG.PGUSER, //env var: PGUSER
+    database: process.env.PGDATABASE || parseCONFIG.PGDATABASE, //env var: PGDATABASE
+    password: process.env.PGPASSWORD || parseCONFIG.PGPASSWORD, //env var: PGPASSWORD
+    host: process.env.PGHOST || parseCONFIG.PGHOST, // Server hosting the postgres database
+    port: process.env.PGPORT || parseCONFIG.PGPORT, //env var: PGPORT
     max: 10, // max number of clients in the pool
     idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
 };
