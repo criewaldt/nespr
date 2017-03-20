@@ -1,12 +1,12 @@
 //config.js
 
 //CONFIG vars
-var PGUSER = 'user';
-var PGDATABASE = 'database';
-var PGPASSWORD = 'password';
-var PGHOST = 'host';
-var PGPORT = 5432;
-var DEPLOY_ENV = 'local'; //'local' or 'heroku'
+var PGUSER = 'user'; // Postgres user
+var PGDATABASE = 'database'; // Postgres db
+var PGPASSWORD = 'password'; //  Postgres password
+var PGHOST = 'host'; // Postgres host
+var PGPORT = 5432; // Postgres port
+var DEPLOY_ENV = 'local'; // 'local' or 'heroku'
 
 module.exports.PGUSER = PGUSER;
 module.exports.PGDATABASE = PGDATABASE;
